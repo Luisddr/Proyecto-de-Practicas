@@ -36,7 +36,7 @@ function SignIn() {
 
   return (
     <div>
-      <h1>Sign In Page</h1>
+      <h1>Sign In</h1>
       <button onClick={logGoogleUser}>Sign in with Google</button>
       <button onClick={signInWithGoogleRedirect}>
         Sign in with Google Redirect
