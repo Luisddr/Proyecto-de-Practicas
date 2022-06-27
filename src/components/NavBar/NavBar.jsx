@@ -1,34 +1,54 @@
 import { Link } from "react-router-dom";
-import './NavBar.styles.scss'
+import "./NavBar.styles.scss";
 
-import {ReactComponent as CrwnLogo} from '../../assets/crown.svg'
+import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
-import {UserContext} from '../../context/user.context';
-import {signOutCurrentUser} from '../../utils/firebase/firebase.utils'; 
+import { UserContext } from "../../context/user.context";
+import { signOutCurrentUser } from "../../utils/firebase/firebase.utils";
 import { useContext } from "react";
+import ShoppingBag from "../shopping-bag/shopping-bag";
+import DropdownBag from "../bag-dropdown/bag-dropdown";
+import {ToggleContext} from "../../context/toggle.context"
 
 
 function NavBar() {
+  const { currentUser } = useContext(UserContext);
+  const {openToggle, setOpenToggle} = useContext(ToggleContext);
 
-    const {currentUser} = useContext(UserContext);
+  const handleClick = ()=>{
+    setOpenToggle(true)
+    console.log(openToggle)
+  }
 
-    return (  
-        <>
-        <div className="navigation">
-            <Link to='/' className="logo-container">
-                <CrwnLogo className="logo"/>
-            </Link>
+
+  return (
+    <>
+      <div className="navigation">
+        <Link to="/" className="logo-container">
+          <CrwnLogo className="logo" />
+        </Link>
         <div className="nav-links-container">
-            <Link className="nav-link" to='/' >Shop</Link>
-            {currentUser?
-                <span className="nav-link" onClick={signOutCurrentUser}>SIGN OUT</span>
-                :
-                <Link className="nav-link" to='/signIn' >Sign-In</Link>
-            }
+          <Link className="nav-link" to="/shop">
+            Shop
+          </Link>
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutCurrentUser}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="nav-link" to="/signIn">
+              Sign-In
+            </Link>
+          )}
+          <ShoppingBag onClick={handleClick} />
         </div>
-        </div>
-        </>
-    );
+        {openToggle  &&
+        <DropdownBag />
+
+        }
+      </div>
+    </>
+  );
 }
 
 export default NavBar;
