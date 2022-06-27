@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -6,7 +6,8 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../FormInput/FormInput";
-import "./SignUp.styles.scss"
+import "./SignUp.styles.scss";
+import { UserContext } from "../../context/user.context";
 
 export function Validate(data) {
   let errors = {};
@@ -40,6 +41,8 @@ function SignUpForm() {
 
   const [errors, setErrors] = useState({});
 
+  const {setCurrentUser} = useContext(UserContext)
+
   const handleChange = (e) => {
     setData({
       ...data,
@@ -68,6 +71,8 @@ function SignUpForm() {
         email,
         password
       );
+
+      setCurrentUser(user)
 
       const { displayName } = data;
 
