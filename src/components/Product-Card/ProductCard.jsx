@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './product-card.styles.scss';
 import Button from '../button/button.component'
 import {ToggleContext} from '../../context/toggle.context'
@@ -9,7 +9,7 @@ function ProductCard({image, name, price, id}) {
 
     const product = {image, name, price, id}
 
-    const {addItemsToBag, currentItems, setCurrentItems} = useContext(ToggleContext)
+    const {addItemsToBag, currentItems, setCurrentItems, setItemsCount} = useContext(ToggleContext)
 
     const handleAddItems = ()=>{
         
@@ -21,11 +21,20 @@ function ProductCard({image, name, price, id}) {
             let itemObj = item[0]
             itemObj.quantity = itemObj.quantity +1
             return setCurrentItems([...currentItems])
-       }
+        }
         product.quantity = 1
         addItemsToBag(product)
         
     }
+    
+    //useEffect(()=>{
+         if(currentItems.length){
+            let elementsToReduce = currentItems.map(c=>c.quantity);
+            let aux = elementsToReduce.reduce((prevVal, currentVal)=>prevVal + currentVal,0);
+            setItemsCount(aux)
+         }
+
+   // },[])
     
 
 

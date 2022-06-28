@@ -1,10 +1,16 @@
 import React from 'react';
+import './bag-items.styles.scss'
 
-function BagItems({name}) {
+function BagItems({name, quantity, image, price }) {
     return (
-        <div>
-            <h3>{name}</h3>
-        </div>
+        <div  className="cart-item-container">
+            <img src={image} alt={`${name}`} />
+                <div className='.item-details'>
+                <span className='name'>{name}</span> <br />
+                <span className='price'>{quantity} x ${price}</span>
+
+                </div>
+              </div>
       );
 }
 
