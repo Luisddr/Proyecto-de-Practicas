@@ -12,7 +12,7 @@ export default function Shop(){
         <div className='products-container'>
             {products && products.map(p=>(
                 <ProductCard key={p.id} name={p.name} price={p.price}
-                    image={p.imageUrl}
+                    image={p.imageUrl} id={p.id}
                 />
             ))}
         </div>
