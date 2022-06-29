@@ -1,23 +1,29 @@
 import { createContext, useState, useEffect } from "react";
-import ProductData from "../product-data.json"
+import {getCategoriesAndDocuments} from "../utils/firebase/firebase.utils"
+
 
 
 
 export const ProductsContext = createContext({
     // setProducts: ()=>null,
-    products : []
+    products : {}
 })
 
 
 export const ProductsProvider = ({children})=>{
-    const [products, setProducts] = useState(ProductData);
+    const [products, setProducts] = useState({});
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const categoryMap = await getCategoriesAndDocuments('categories');
+            // console.log(categoryMap)
+            setProducts(categoryMap)
+        };
+        fetchData()
+    },[])
+   
     const value = {products};
     
-    // useEffect(()=>{
-    //     //fetch data when mount
-        
-
-    // },[])
 
     return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
 }
