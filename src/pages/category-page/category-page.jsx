@@ -15,9 +15,12 @@ function CategoryPage() {
         <h2 style={{textTransform:"upperCase"}}>{title}</h2>
         <div className="products-container">
 
-        {products && products[title].map(p=>(
+        {products?
+         products[title].map(p=>(
             <ProductCard key={p.id} name={p.name} image={p.imageUrl} price={p.price} id={p.id} />
             ))
+            :
+            <h3>Loading 😊</h3>
             
             
         }
