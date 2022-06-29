@@ -3,6 +3,7 @@ import Button from "../button/button.component";
 import "./bag-dropdown.styles.scss";
 import {ToggleContext} from '../../context/toggle.context'
 import BagItems from "../bag-items/bag-items";
+import {Link} from "react-router-dom"
 
 
 function DropdownBag() {
@@ -32,7 +33,16 @@ function DropdownBag() {
 
             }
       </div>
-      <Button>CheckOut</Button>
+      {currentItems.length?
+        <Link to={'/checkout'}>
+          <Button>CheckOut</Button>
+        </Link>
+        :
+        <Link style={{textDecoration:"underline"}} to={'/shop'}>
+        <span className="empty-message">Let's add some items</span>
+        </Link>
+
+      }
     </div>
   );
 }

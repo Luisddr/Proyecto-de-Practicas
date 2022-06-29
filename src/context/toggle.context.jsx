@@ -12,14 +12,23 @@ export const ToggleContext = createContext({
 
 export const ToggleProvider = ({children}) =>{
 
-    const [openToggle, setOpenToggle] = useState(false)
-    const [currentItems, setCurrentItems] = useState([])
-    const [itemsCount, setItemsCount] = useState(0)
+    const [openToggle, setOpenToggle] = useState(false);
+    const [currentItems, setCurrentItems] = useState([]);
+    const [itemsCount, setItemsCount] = useState(0);
+    // const[subTotal, setSubTotal] = useState(0);
 
     
 
 
-   
+   useEffect(()=>{
+    let elementsToReduce = currentItems.map(c=>c.quantity);
+            let aux = elementsToReduce.reduce((prevVal, currentVal)=>prevVal + currentVal,0);
+            setItemsCount(aux)
+
+            getSubTotal()
+
+
+   },[currentItems])
 
     // const reduceItems = ()=>{
     //     if(currentItems.length){
@@ -30,6 +39,13 @@ export const ToggleProvider = ({children}) =>{
     //     }
     //     return
     //   }
+
+    const getSubTotal = ()=>{
+        currentItems.map(item=>{
+
+            return item.subtotal = item.price * item.quantity
+        })
+    }
     
     const addItemsToBag = (product) =>{
         setCurrentItems([...currentItems, product])

@@ -5,6 +5,8 @@ import SignIn from "./components/SingInPage/SignIn"
 import Home from "./pages/Home";
 import Shop from "./pages/Shop/shop.component";
 import BagItems from "./components/bag-items/bag-items";
+import CheckoutPage from "./pages/Checkout/checkout-page";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Route path="/signIn" component={SignIn} />
       <Route path="/shop" component={Shop}/> 
       <Route path="/Bag" component={BagItems}/> 
+      <Route path="/checkout" component={CheckoutPage}/>
 
     </div>
   );
