@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from "react";
+import { Link } from "react-router-dom";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import { ProductsContext } from "../../context/products.context";
 import "./shop.styles.scss";
@@ -10,9 +11,11 @@ export default function Shop() {
     <Fragment>
       {Object.keys(products).map((title) => (
         <Fragment key={title}>
-          <h2>{title}</h2>
+          <Link to={`/shop/${title}`}>
+          <h2 style={{textTransform:"upperCase"}}>{title}</h2>
+          </Link>
           <div className="products-container">
-            {products[title].map((p) => (
+            {products[title].slice(0,4).map((p) => (
               <ProductCard
                 key={p.id}
                 id={p.id}

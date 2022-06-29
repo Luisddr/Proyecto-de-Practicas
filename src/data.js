@@ -22,13 +22,13 @@ export const data = [
 
   {
     id: 4,
-    categorie: "Women",
+    categorie: "Womens",
     image:
       "https://www.flawssy.com/wp-content/uploads/2016/04/ideas-for-grunge-fashion.jpg",
   },
   {
     id: 5,
-    categorie: "Men",
+    categorie: "Mens",
     image:
       "https://i2.wp.com/www.theunstitchd.com/wp-content/uploads/2020/01/Trouser-tee-Jacket-Outfit-idea-for-2020.jpg?fit=593%2C1261",
   },
