@@ -7,19 +7,23 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/user.context";
 import { ProductsProvider } from "./context/products.context";
 import { ToggleProvider } from "./context/toggle.context";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
-      <UserProvider>
+      {/* <UserProvider> */}
         <ProductsProvider>
           <ToggleProvider>
               <App /> 
           </ToggleProvider>
         </ProductsProvider>
-      </UserProvider>
+      {/* </UserProvider> */}
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -3,16 +3,20 @@ import "./NavBar.styles.scss";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
-import { UserContext } from "../../context/user.context";
+// import { UserContext } from "../../context/user.context";
 import { signOutCurrentUser } from "../../utils/firebase/firebase.utils";
 import { useContext } from "react";
 import ShoppingBag from "../shopping-bag/shopping-bag";
 import DropdownBag from "../bag-dropdown/bag-dropdown";
-import {ToggleContext} from "../../context/toggle.context"
+import {ToggleContext} from "../../context/toggle.context";
+import {useSelector} from "react-redux";
 
 
 function NavBar() {
-  const { currentUser } = useContext(UserContext);
+
+  const currentUser = useSelector((state)=>state.currentUser)
+  console.log(currentUser)
+  // const { currentUser } = useContext(UserContext);
   const {openToggle, setOpenToggle} = useContext(ToggleContext);
 
   const handleClick = ()=>{
