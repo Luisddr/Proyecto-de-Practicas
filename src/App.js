@@ -18,6 +18,7 @@ function App() {
   useEffect(()=>{
     const unsuscribe = stateChangedListener((user)=>{
         if(user){
+          console.log(user)
             createUserDocumentFromAuth(user);
         }
         dispatch(setCurrentUser(user))

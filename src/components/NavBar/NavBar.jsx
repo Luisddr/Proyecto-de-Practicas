@@ -14,7 +14,7 @@ import {useSelector} from "react-redux";
 
 function NavBar() {
 
-  const currentUser = useSelector((state)=>state.currentUser)
+  const currentUser = useSelector((state)=>state.user.currentUser)
   console.log(currentUser)
   // const { currentUser } = useContext(UserContext);
   const {openToggle, setOpenToggle} = useContext(ToggleContext);
@@ -35,15 +35,15 @@ function NavBar() {
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
-          {currentUser ? (
+          {currentUser ? 
             <span className="nav-link" onClick={signOutCurrentUser}>
               SIGN OUT
             </span>
-          ) : (
+           : 
             <Link className="nav-link" to="/signIn">
               Sign-In
             </Link>
-          )}
+          }
           <ShoppingBag onClick={handleClick} />
         </div>
         {openToggle  &&
