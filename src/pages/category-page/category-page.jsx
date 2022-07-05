@@ -1,15 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProductsContext } from "../../context/products.context";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { fetchCategoriesAsync } from "../../store/actions/products-actions";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import "./category-page.styles.scss";
+import Spinner from "../../components/spinner/spinner";
 
 function CategoryPage() {
   const { title } = useParams();
-  const { products } = useContext(ProductsContext);
+  const  products = useSelector((state)=>state.categories.products);
+  const isLoading = useSelector((state)=>state.categories.isLoading)
   const [productsMap, setProductsMap] = useState(products[title]);
-
+  const dispatch = useDispatch()
+  
   useEffect(() => {
+
+    if(!products[title]){
+      dispatch(fetchCategoriesAsync())
+    }
+
     setProductsMap(products[title]);
   }, [title, products]);
 
@@ -17,7 +26,7 @@ function CategoryPage() {
     <>
       <h2 style={{ textTransform: "upperCase" }}>{title}</h2>
       <div className="products-container">
-        {productsMap && productsMap.length ? (
+        {productsMap && productsMap.length &&
           productsMap.map((p) => (
             <ProductCard
               key={p.id}
@@ -27,10 +36,15 @@ function CategoryPage() {
               id={p.id}
             />
           ))
-        ) : (
-          <h3>Loading 😊</h3>
-        )}
-      </div>
+        }
+        
+        
+        </div>
+
+        {isLoading &&
+            <Spinner/>
+
+        }
     </>
   );
 }

@@ -3,4 +3,12 @@
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
     row-gap: 50px;
+
+  }
+  
+  .centered_spinner{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    width: 40%;
   }
