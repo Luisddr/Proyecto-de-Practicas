@@ -1,15 +1,33 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useEffect } from "react";
+import {getCategoriesAndDocuments} from "../../utils/firebase/firebase.utils"
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "../../components/Product-Card/ProductCard";
-import { ProductsContext } from "../../context/products.context";
+import {setProducts} from '../../store/actions/products-actions/index'
+
 import "./shop.styles.scss";
 
 export default function Shop() {
-  const { products } = useContext(ProductsContext);
+
+  const dispatch = useDispatch()
+
+  const  products  = useSelector((state)=>state.categories.products);
+  console.log(products)
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+        const categoryMap = await getCategoriesAndDocuments('categories');
+        // console.log(categoryMap)
+        dispatch(setProducts(categoryMap))
+    };
+    fetchData()
+},[dispatch])
+
+
 
   return (
     <Fragment>
-      {Object.keys(products).map((title) => (
+      {products && Object.keys(products).map((title) => (
         <Fragment key={title}>
           <Link to={`/shop/${title}`}>
           <h2 style={{textTransform:"upperCase"}}>{title}</h2>
