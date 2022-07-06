@@ -25,15 +25,3 @@ export function fetchCategoriesFailed(payload){
     }
 }
 
-export const fetchCategoriesAsync = ()=> async (dispatch) =>{
-    dispatch(fetchCategoriesStart())
-    try{
-        const categoriesArray = await getCategoriesAndDocuments('categories');
-        dispatch(fetchCategoriesSuccess(categoriesArray))
-
-    }
-    catch(err){
-        dispatch(fetchCategoriesFailed(err))
-    }
-
-}

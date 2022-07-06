@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { fetchCategoriesAsync } from "../../store/actions/products-actions";
+import { fetchCategoriesStart } from "../../store/actions/products-actions";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import "./category-page.styles.scss";
 import Spinner from "../../components/spinner/spinner";
@@ -16,7 +16,7 @@ function CategoryPage() {
   useEffect(() => {
 
     if(!products[title]){
-      dispatch(fetchCategoriesAsync())
+      dispatch(fetchCategoriesStart())
     }
 
     setProductsMap(products[title]);

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "../../components/Product-Card/ProductCard";
-import {fetchCategoriesAsync} from '../../store/actions/products-actions/index'
+import {fetchCategoriesStart} from '../../store/actions/products-actions/index'
 import Spinner from '../../components/spinner/spinner'
 
 import "./shop.styles.scss";
@@ -15,7 +15,7 @@ export default function Shop() {
   const isLoading = useSelector((state)=>state.categories.isLoading);
 
  useEffect(()=>{
-  dispatch(fetchCategoriesAsync())
+  dispatch(fetchCategoriesStart())
  },[])
 
 
