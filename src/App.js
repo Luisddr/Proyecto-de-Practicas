@@ -8,23 +8,15 @@ import Shop from "./pages/Shop/shop.component";
 import BagItems from "./components/bag-items/bag-items";
 import CheckoutPage from "./pages/Checkout/checkout-page";
 import CategoryPage from "./pages/category-page/category-page";
-import {useDispatch, useSelector} from "react-redux"
-import {setCurrentUser} from "./store/actions/user-actions/index";
-import {stateChangedListener, createUserDocumentFromAuth} from "./utils/firebase/firebase.utils"
+import {useDispatch} from "react-redux"
+import {checkUserSession} from "./store/actions/user-actions/index";
+
 
 function App() {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    const unsuscribe = stateChangedListener((user)=>{
-        if(user){
-          console.log(user)
-            createUserDocumentFromAuth(user);
-        }
-        dispatch(setCurrentUser(user))
-    })
-
-    return unsuscribe
+    dispatch(checkUserSession())
 
 }, [])
 
