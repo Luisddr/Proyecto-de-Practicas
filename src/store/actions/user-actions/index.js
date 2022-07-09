@@ -1,4 +1,4 @@
-import {CHECK_USER_SESSION, EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START, SET_CURRENT_USER, SIGN_IN_FAILURE, SIGN_IN_SUCCESS} from "./actions-types";
+import {CHECK_USER_SESSION, EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START, SET_CURRENT_USER, SIGN_IN_FAILURE, SIGN_IN_SUCCESS, SIGN_OUT, SIGN_OUT_START, SIGN_OUT_SUCCESS} from "./actions-types";
 
 
 export function setCurrentUser (payload){
@@ -43,3 +43,14 @@ export function signInFailure(payload){
     }
 }
 
+export function signOutStart(){
+    return{
+        type: SIGN_OUT_START
+    }
+}
+
+export function signOutSuccess(){
+    return{
+        type: SIGN_OUT_SUCCESS
+    }
+}

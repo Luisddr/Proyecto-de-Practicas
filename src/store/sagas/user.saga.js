@@ -4,15 +4,17 @@ import {
   CHECK_USER_SESSION,
   EMAIL_SIGN_IN_START,
   GOOGLE_SIGN_IN_START,
+  SIGN_OUT_START,
 } from "../actions/user-actions/actions-types";
 
-import { signInSuccess, signInFailure } from "../actions/user-actions";
+import { signInSuccess, signInFailure, signOutSuccess } from "../actions/user-actions";
 
 import {
   getCurrentUser,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword 
+  signInAuthUserWithEmailAndPassword,
+  signOutCurrentUser
   
 } from "../../utils/firebase/firebase.utils";
 
@@ -53,6 +55,17 @@ export function* signInWithEmail(payload){
   }
 }
 
+export function* userSignOut(){
+  try{
+    yield call(signOutCurrentUser);
+    yield put(signOutSuccess());
+
+  }
+  catch(err){
+    yield put(signInFailure(err))
+  }
+}
+
 export function* isUserAuth() {
   try {
     const userAuth = yield call(getCurrentUser);
@@ -76,6 +89,10 @@ export function* onCheckUserSession() {
   yield takeLatest(CHECK_USER_SESSION, isUserAuth);
 }
 
+export function* onSignOut(){
+  yield takeLatest(SIGN_OUT_START, userSignOut)
+}
+
 export function* userSagas() {
-  yield all([call(onCheckUserSession), call(onGoogleSignInStart), call(onEmailSignInStart)]);
+  yield all([call(onCheckUserSession), call(onGoogleSignInStart), call(onEmailSignInStart), call(onSignOut)]);
 }
