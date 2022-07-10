@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ToggleProvider } from "./context/toggle.context";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
+import {Elements} from '@stripe/react-stripe-js'
+import { stripePromise } from "./utils/stripe/stripe.utils";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +16,9 @@ root.render(
     <Provider store={store}>
     <BrowserRouter>
           <ToggleProvider>
+            <Elements stripe={stripePromise}>
               <App /> 
+            </Elements>
           </ToggleProvider>
     </BrowserRouter>
     </Provider>

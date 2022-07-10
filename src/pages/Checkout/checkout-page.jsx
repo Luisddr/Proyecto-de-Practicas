@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./checkout-page.scss";
 import { ToggleContext } from "../../context/toggle.context";
 import CheckoutDetails from "../../components/checkout-details/checkout-details";
+import PaymentForm from "../../components/payment-form/payment-form";
+
 
 function CheckoutPage() {
   const { currentItems} = useContext(ToggleContext);
@@ -51,6 +53,7 @@ function CheckoutPage() {
         <h3>Your Bag is Empty 😔</h3>
     }
       <div className='total'>TOTAL: ${total}</div>
+      <PaymentForm amount={total}/>
     </div>
   );
 };

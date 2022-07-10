@@ -1,3 +1,4 @@
+import { ButtonSpinner } from './button-spinner.styles';
 import './button.styles.scss'
 
 
@@ -6,12 +7,12 @@ const BUTTON_TYPE={
     inverted: 'inverted'
 }
 
-function Button({children, buttonType, ...otherProps}) {
+function Button({children, buttonType, isLoading, ...otherProps}) {
     return (  
-        <button className={`button-container ${BUTTON_TYPE[buttonType]}`}
+        <button disabled={isLoading} className={`button-container ${BUTTON_TYPE[buttonType]}`}
         {...otherProps}
         >
-            {children}
+            {isLoading ? <ButtonSpinner/> : children }
         </button>
     );
 }
