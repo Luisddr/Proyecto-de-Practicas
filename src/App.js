@@ -1,15 +1,18 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, lazy, Suspense} from 'react';
 import {Route} from "react-router-dom"
 import NavBar from "./components/NavBar/NavBar";
 import "./index.styles.scss"
-import SignIn from "./components/SingInPage/SignIn"
-import Home from "./pages/Home";
-import Shop from "./pages/Shop/shop.component";
-import BagItems from "./components/bag-items/bag-items";
-import CheckoutPage from "./pages/Checkout/checkout-page";
-import CategoryPage from "./pages/category-page/category-page";
+import Spinner from './components/spinner/spinner';
+
 import {useDispatch} from "react-redux"
 import {checkUserSession} from "./store/actions/user-actions/index";
+
+const SignIn = lazy(()=>import("./components/SingInPage/SignIn"))
+const Home = lazy(()=>import("./pages/Home"))
+const Shop = lazy(()=>import("./pages/Shop/shop.component"))
+const BagItems = lazy(()=>import("./components/bag-items/bag-items"))
+const CheckoutPage = lazy(()=>import("./pages/Checkout/checkout-page"))
+const CategoryPage = lazy(()=>import("./pages/category-page/category-page"))
 
 
 function App() {
@@ -23,6 +26,8 @@ function App() {
 
   return (
     <div className="App">
+      <Suspense fallback={<Spinner/>}>
+
       <NavBar/>
       <Route exact path="/" component={Home}/>
       <Route path="/signIn" component={SignIn} />
@@ -30,6 +35,7 @@ function App() {
       <Route path="/shop/:title" component={CategoryPage}/>
       <Route path="/Bag" component={BagItems}/> 
       <Route path="/checkout" component={CheckoutPage}/>
+      </Suspense>
 
     </div>
   );
