@@ -3,21 +3,61 @@ import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../context/products.context";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import "./category-page.styles.scss";
+import Spinner from "../../components/spinner/spinner.component";
+import {gql, useQuery} from '@apollo/client';
+
+
+const GET_CATEGORY = gql`
+  query($title : String!){
+    getCollectionsByTitle(title: $title){
+      id
+      title
+      items{
+        id
+        name
+        price
+        imageUrl
+      }
+    }
+  }
+`
+
 
 function CategoryPage() {
   const { title } = useParams();
-  const { products } = useContext(ProductsContext);
-  const [productsMap, setProductsMap] = useState(products[title]);
+ // const { products, loading } = useContext(ProductsContext);
 
-  useEffect(() => {
-    setProductsMap(products[title]);
-  }, [title, products]);
+const {loading, error, data} = useQuery(GET_CATEGORY, {
+  variables:{
+    title: title
+  }
+})
+
+
+useEffect(()=>{
+  if(data){
+    const {
+      getCollectionsByTitle: {items}
+    } = data
+
+    setProductsMap(items)
+  }
+},[title, data])
+
+
+  const [productsMap, setProductsMap] = useState([]);
+
+ 
 
   return (
     <>
       <h2 style={{ textTransform: "upperCase" }}>{title}</h2>
+        {loading &&
+        <Spinner/>
+
+        }
       <div className="products-container">
-        {productsMap && productsMap.length ? (
+        {productsMap && productsMap.length && 
           productsMap.map((p) => (
             <ProductCard
               key={p.id}
@@ -27,9 +67,7 @@ function CategoryPage() {
               id={p.id}
             />
           ))
-        ) : (
-          <h3>Loading 😊</h3>
-        )}
+        }
       </div>
     </>
   );

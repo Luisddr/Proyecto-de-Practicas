@@ -7,10 +7,18 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/user.context";
 import { ProductsProvider } from "./context/products.context";
 import { ToggleProvider } from "./context/toggle.context";
+import { InMemoryCache, ApolloClient, ApolloProvider} from "@apollo/client";
+
+
+const client = new ApolloClient({
+  uri:"https://crwn-clothing.com/",
+  cache: new InMemoryCache()
+})
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <ApolloProvider client={client}>
     <BrowserRouter>
       <UserProvider>
         <ProductsProvider>
@@ -20,6 +28,7 @@ root.render(
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
+    </ApolloProvider>
   </React.StrictMode>
 );
 

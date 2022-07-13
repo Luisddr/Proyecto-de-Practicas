@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import { ProductsContext } from "../../context/products.context";
 import "./shop.styles.scss";
+import Spinner from '../../components/spinner/spinner.component'
 
 export default function Shop() {
-  const { products } = useContext(ProductsContext);
+  const { products, loading } = useContext(ProductsContext);
 
   return (
     <Fragment>
-      {Object.keys(products).map((title) => (
+
+      {loading? <Spinner/> :
+      
+      Object.keys(products).map((title) => (
         <Fragment key={title}>
           <Link to={`/shop/${title}`}>
           <h2 style={{textTransform:"upperCase"}}>{title}</h2>
@@ -27,6 +31,7 @@ export default function Shop() {
           </div>
         </Fragment>
       ))}
+      
     </Fragment>
   );
 }
