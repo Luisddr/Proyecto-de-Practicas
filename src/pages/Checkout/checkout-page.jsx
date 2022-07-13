@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, memo } from "react";
 import "./checkout-page.scss";
 import { ToggleContext } from "../../context/toggle.context";
 import CheckoutDetails from "../../components/checkout-details/checkout-details";
 import PaymentForm from "../../components/payment-form/payment-form";
 
 
-function CheckoutPage() {
+const CheckoutPage = memo(()=> {
   const { currentItems} = useContext(ToggleContext);
   const [total, setTotal] = useState(0);
 
@@ -56,7 +56,7 @@ function CheckoutPage() {
       <PaymentForm amount={total}/>
     </div>
   );
-};
+});
    
 
 export default CheckoutPage;
