@@ -4,8 +4,26 @@
     column-gap: 10px;
     row-gap: 50px;
 
+    @media screen and(max-width: 800px){
+      display: flex;
+      // grid-template-columns: repeat(1, 1fr);
+      flex-wrap: wrap;
+    
+    }
+
+    
   }
   
+  h2{
+    width: 40%;
+    margin: auto;
+    @media screen and(max-width:800px) {
+      margin: 50px auto;
+      width: 25%;
+
+      
+    }
+  }
   .centered_spinner{
     text-align: center;
     align-items: center;

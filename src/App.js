@@ -1,8 +1,9 @@
 import React, { useEffect, lazy, Suspense} from 'react';
 import {Route} from "react-router-dom"
 import NavBar from "./components/NavBar/NavBar";
-import "./index.styles.scss"
 import Spinner from './components/spinner/spinner';
+
+import {GlobalStyle} from './global.styles'
 
 import {useDispatch} from "react-redux"
 import {checkUserSession} from "./store/actions/user-actions/index";
@@ -25,7 +26,8 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div>
+      <GlobalStyle/>
       <Suspense fallback={<Spinner/>}>
 
       <NavBar/>

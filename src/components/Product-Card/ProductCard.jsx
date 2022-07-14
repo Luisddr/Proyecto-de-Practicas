@@ -26,7 +26,7 @@ function ProductCard({ image, name, price, id }) {
       <img src={image} alt={`${name}`} />
       <div className="footer">
         <span className="name">{name}</span>
-        <span className="price">{price}</span>
+        <span className="price">${price}</span>
       </div>
       <Button buttonType="inverted" onClick={handleAddItems}>
         Add to card
