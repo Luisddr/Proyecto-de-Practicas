@@ -11,7 +11,7 @@ function CardComponent({id, image, categorie}) {
         <div className="background-image" style={{backgroundImage:`url(${image})`}}/>
         <div className="category-body-container">
           <Link to={`/shop/${category}`}>
-          <h3>{categorie}</h3>
+          <h3 className='testing-category'>{categorie}</h3>
           </Link>
           <span>Shop Now</span>
         
