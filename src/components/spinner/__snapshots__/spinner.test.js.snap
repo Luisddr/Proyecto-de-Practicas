@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render Spinner 1`] = `
+<styled.div>
+  <styled.div />
+</styled.div>
+`;
