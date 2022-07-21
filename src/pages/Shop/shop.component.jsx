@@ -5,7 +5,10 @@ import ProductCard from "../../components/Product-Card/ProductCard";
 import {fetchCategoriesStart} from '../../store/actions/products-actions/index'
 import Spinner from '../../components/spinner/spinner'
 
+
 import "./shop.styles.scss";
+
+import { Helmet } from "react-helmet";
 
 export default function Shop() {
 
@@ -22,6 +25,11 @@ export default function Shop() {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Clothing Store</title>
+        <meta name="description" content="Shop now in this awesome shop"/>
+      </Helmet>
+
       {isLoading? 
       (<Spinner/>)
 
