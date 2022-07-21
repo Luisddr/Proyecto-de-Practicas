@@ -26,7 +26,7 @@ export default function Shop() {
   return (
     <Fragment>
       <Helmet>
-        <title>Clothing Store</title>
+        <title>Shop Now</title>
         <meta name="description" content="Shop now in this awesome shop"/>
       </Helmet>
 
