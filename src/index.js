@@ -5,22 +5,25 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ToggleProvider } from "./context/toggle.context";
+import { DarkModeProvider } from "./context/dark-mode.context";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
-import {Elements} from '@stripe/react-stripe-js'
+import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "./utils/stripe/stripe.utils";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
+      <DarkModeProvider>
+        <BrowserRouter>
           <ToggleProvider>
             <Elements stripe={stripePromise}>
-              <App /> 
+              <App />
             </Elements>
           </ToggleProvider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </DarkModeProvider>
     </Provider>
   </React.StrictMode>
 );

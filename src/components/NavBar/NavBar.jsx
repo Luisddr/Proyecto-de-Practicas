@@ -10,9 +10,14 @@ import ShoppingBag from "../shopping-bag/shopping-bag";
 import DropdownBag from "../bag-dropdown/bag-dropdown";
 import {ToggleContext} from "../../context/toggle.context";
 import {useSelector, useDispatch} from "react-redux";
+import {DarkModeContext, themes} from "../../context/dark-mode.context"
 
 
 function NavBar() {
+
+  const [darkMode , setDarkMode] = useState(true)
+
+  const {theme, changeTheme} = useContext(DarkModeContext)
 
   const dispatch = useDispatch()
 
@@ -20,12 +25,14 @@ function NavBar() {
   // const { currentUser } = useContext(UserContext);
   const {openToggle, setOpenToggle} = useContext(ToggleContext);
 
+
   const handleClick = ()=>{
     setOpenToggle(true)
     console.log(openToggle)
   }
 
   const handleSignOut = ()=>dispatch(signOutStart());
+
   
 
   return (
@@ -35,6 +42,17 @@ function NavBar() {
           <CrwnLogo className="logo" />
         </Link>
         <div className="nav-links-container">
+
+          <div
+          onClick={()=>{
+            darkMode ? setDarkMode(false) : setDarkMode(true)
+            changeTheme(darkMode ? themes.dark : themes.light)
+          }}          
+          className="nav-link">
+            Mode
+
+          </div>
+       
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
