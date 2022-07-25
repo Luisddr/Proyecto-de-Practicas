@@ -9,6 +9,7 @@ import {
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/signInForm";
 import "./signInpage.styles.scss"
+import { Helmet } from "react-helmet";
 
 
 function SignIn() {
@@ -37,6 +38,9 @@ function SignIn() {
 
   return (
     <div className="authentication-container">
+      <Helmet>
+        <title>Clothing Store | authentication</title>
+      </Helmet>
       <SignInForm/>
       <SignUpForm/>
     </div>

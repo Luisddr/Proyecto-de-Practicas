@@ -5,6 +5,7 @@ import { fetchCategoriesStart } from "../../store/actions/products-actions";
 import ProductCard from "../../components/Product-Card/ProductCard";
 import "./category-page.styles.scss";
 import Spinner from "../../components/spinner/spinner";
+import { Helmet } from "react-helmet";
 
 function CategoryPage() {
   const { title } = useParams();
@@ -24,6 +25,9 @@ function CategoryPage() {
 
   return (
     <>
+    <Helmet>
+      <title>{`Cloting Store | ${title}`}</title>
+    </Helmet>
       <h2 style={{ textTransform: "upperCase" }}>{title}</h2>
       <div className="products-container">
         {productsMap && productsMap.length &&

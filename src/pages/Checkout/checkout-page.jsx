@@ -3,7 +3,7 @@ import "./checkout-page.scss";
 import { ToggleContext } from "../../context/toggle.context";
 import CheckoutDetails from "../../components/checkout-details/checkout-details";
 import PaymentForm from "../../components/payment-form/payment-form";
-
+import { Helmet } from "react-helmet";
 
 const CheckoutPage = memo(()=> {
   const { currentItems} = useContext(ToggleContext);
@@ -18,6 +18,11 @@ const CheckoutPage = memo(()=> {
   }, [finalPrice]);
 
   return (
+    <>
+    <Helmet>
+      <title>Clothing Store | Checkout items</title>
+
+    </Helmet>
     <div className='checkout-container'>
       <div className='checkout-header'>
         <div className='header-block'>
@@ -38,7 +43,7 @@ const CheckoutPage = memo(()=> {
       </div>
       {currentItems.length?
        currentItems.map((item) => (
-        <CheckoutDetails key={item.id}
+         <CheckoutDetails key={item.id}
          id={item.id}
          name={item.name}
          price={item.price}
@@ -48,13 +53,14 @@ const CheckoutPage = memo(()=> {
          />
          
          
-      ))
-        :
-        <h3>Your Bag is Empty 😔</h3>
-    }
+         ))
+         :
+         <h3>Your Bag is Empty 😔</h3>
+        }
       <div className='total'>TOTAL: ${total}</div>
       <PaymentForm amount={total}/>
     </div>
+        </>
   );
 });
    
