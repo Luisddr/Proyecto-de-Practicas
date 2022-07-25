@@ -11,6 +11,8 @@ import DropdownBag from "../bag-dropdown/bag-dropdown";
 import {ToggleContext} from "../../context/toggle.context";
 import {useSelector, useDispatch} from "react-redux";
 import {DarkModeContext, themes} from "../../context/dark-mode.context"
+import sun from "../../assets/sun.svg"
+import moon from "../../assets/moon.svg"
 
 
 function NavBar() {
@@ -49,9 +51,16 @@ function NavBar() {
             changeTheme(darkMode ? themes.dark : themes.light)
           }}          
           className="nav-link">
-            Mode
-
+            {!darkMode?
+              <img className="darkIcon" src={`${sun}`} alt="sun" />
+                :
+                <img src={`${moon}`} alt="moon" />
+            }
+          
           </div>
+        
+
+        
        
           <Link className="nav-link" to="/shop">
             Shop

@@ -32,3 +32,10 @@ code {
     color:white;
 
   }
+
+  .dark-content .darkIcon{
+    background-color: yellow;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+  }

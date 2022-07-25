@@ -65,4 +65,29 @@
         font-size: 16px;
       }
     }
+
+    .category-body-container-dark {
+      height: 90px;
+      padding: 0 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid white;
+      background-color: black;
+      opacity: 0.7;
+      position: absolute;
+  
+      h2 {
+        font-weight: bold;
+        margin: 0 6px 0;
+        font-size: 22px;
+        color: aliceblue;
+      }
+  
+      span {
+        font-weight: lighter;
+        font-size: 16px;
+      }
+    }
   }
