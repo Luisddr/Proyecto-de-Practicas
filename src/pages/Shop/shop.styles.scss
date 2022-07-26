@@ -15,8 +15,10 @@
   }
   
   h2{
-    width: 40%;
+    width: 10%;
     margin: auto;
+    margin-bottom: 10px;
+    
     @media screen and(max-width:800px) {
       margin: 50px auto;
       width: 25%;
@@ -29,4 +31,10 @@
     align-items: center;
     margin: auto;
     width: 40%;
+  }
+
+  .styledLink{
+    :hover{
+      text-decoration: underline;
+    }
   }

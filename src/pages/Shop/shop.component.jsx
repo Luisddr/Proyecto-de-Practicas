@@ -19,7 +19,7 @@ export default function Shop() {
 
  useEffect(()=>{
   dispatch(fetchCategoriesStart())
- },[])
+ },[dispatch])
 
 
 
@@ -37,7 +37,7 @@ export default function Shop() {
 
       (products && Object.keys(products).map((title) => (
         <Fragment key={title}>
-          <Link to={`/shop/${title}`}>
+          <Link className="styledLink" to={`/shop/${title}`}>
           <h2 style={{textTransform:"upperCase"}}>{title}</h2>
           </Link>
           <div className="products-container">
