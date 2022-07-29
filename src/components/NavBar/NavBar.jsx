@@ -24,6 +24,7 @@ function NavBar() {
   const dispatch = useDispatch()
 
   const currentUser = useSelector((state)=>state.user.currentUser)
+  console.log(currentUser?.displayName)
   // const { currentUser } = useContext(UserContext);
   const {openToggle, setOpenToggle} = useContext(ToggleContext);
 
