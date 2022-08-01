@@ -44,6 +44,7 @@ function CheckoutDetails({ name, quantity, id, price, subtotal, image }) {
         className="remove-button"
         onClick={() => {
           let filteredItems = currentItems.filter((i) => i.id !== id);
+          console.log(filteredItems)
           setCurrentItems(filteredItems);
         }}
       >

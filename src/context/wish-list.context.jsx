@@ -4,45 +4,25 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 
+
 export const WhishListContext = createContext({
-    users:{},
-    setUsers: ()=>{}
+    wishList:[]
 
 })
 
-const USERS = gql`
-    query{
-        users{
-            id
-            name
-        }
-    }
-`
 
-const ADD = gql`
-    mutation AddUser ($type: String){ 
-        addUser(type: $type){
-            id
-            name
-
-        }
-    }
-`
 
 export const WhishListProvider = ({children})=>{
-    const {loading, data, error} = useQuery(USERS)
-    const [users, setUsers] = useState({})
+    const [wishList, setWishList] = useState([])
+  
 
 
    
-
-    useEffect(()=>{
-        
-        console.log(data)
-    },[data])
+const value = {wishList, setWishList}
+    
 
 
-    return<WhishListContext.Provider>{children}</WhishListContext.Provider>
+    return<WhishListContext.Provider value={value}>{children}</WhishListContext.Provider>
 
 }
 

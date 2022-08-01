@@ -5,7 +5,7 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 // import { UserContext } from "../../context/user.context";
 import { signOutStart } from "../../store/actions/user-actions";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ShoppingBag from "../shopping-bag/shopping-bag";
 import DropdownBag from "../bag-dropdown/bag-dropdown";
 import {ToggleContext} from "../../context/toggle.context";
@@ -13,9 +13,22 @@ import {useSelector, useDispatch} from "react-redux";
 import {DarkModeContext, themes} from "../../context/dark-mode.context"
 import sun from "../../assets/sun.svg"
 import moon from "../../assets/moon.svg"
+import {gql, useMutation} from "@apollo/client"
+
+//mutation add user to graphql-db
+const SET_USER = gql`
+  mutation AddUser($type: String){
+    addUser(name: $type){
+      id
+      name
+    }
+  }
+`
 
 
 function NavBar() {
+
+  const [addUser, {data, loading, error}] = useMutation(SET_USER)
 
   const [darkMode , setDarkMode] = useState(true)
 
@@ -35,6 +48,11 @@ function NavBar() {
   }
 
   const handleSignOut = ()=>dispatch(signOutStart());
+
+  useEffect(()=>{
+    currentUser && currentUser.displayName && addUser({variables: {type: currentUser.displayName}})
+  
+  },[currentUser])
 
   
 
@@ -65,6 +83,10 @@ function NavBar() {
        
           <Link className="nav-link" to="/shop">
             Shop
+          </Link>
+
+          <Link className="nav-link" to="/wish-list">
+            Wish List
           </Link>
           {currentUser ? 
             <span className="nav-link" onClick={handleSignOut}>
